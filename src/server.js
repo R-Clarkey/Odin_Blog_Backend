@@ -7,4 +7,4 @@ if (process.env.NODE_ENV !== "production") {
 
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+app.listen(PORT, () => console.log(`Listening on http://127.0.0.1:${PORT}`))
