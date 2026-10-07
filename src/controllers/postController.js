@@ -1,5 +1,14 @@
+import * as postService from "../services/postService.js"
+
 async function getAllPosts(req, res) {
-    res.json("Posts")
+    res.json("All")
+}
+
+async function getAllMyPosts(req, res) {
+    console.log("USER ID",req.user.user.id)
+    const posts = await postService.getAllMyPosts(req.user.user.id)
+    console.log(posts)
+    res.json(posts)
 }
 
 async function getPostById(req, res) {
@@ -11,7 +20,13 @@ async function createPost(req, res) {
 }
 
 async function updatePost(req, res) {
-    res.json("Update")
+    console.log("Testing")
+    console.log("PATCH hit", req.params.id)
+    const postId = Number(req.params.id)
+    const { published } = req.body
+
+    const updatedPost = await postService.updatePost(postId, { published })
+    res.json(updatedPost)
 }
 
 async function deletePost(req, res) {
@@ -20,8 +35,10 @@ async function deletePost(req, res) {
 
 export {
     getAllPosts,
+    getAllMyPosts,
     getPostById,
     createPost,
     updatePost,
-    deletePost
+    deletePost,
+
 }
