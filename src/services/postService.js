@@ -19,6 +19,14 @@ export function getAllMyPosts(userId) {
     })
 }
 
+export function getPostById(postId) {
+    return prisma.post.findUnique({
+        where: {
+            id: postId
+        }
+    })
+}
+
 export function updatePost(postId, data) {
     return prisma.post.update({
         where: { id: postId },

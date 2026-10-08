@@ -5,14 +5,14 @@ async function getAllPosts(req, res) {
 }
 
 async function getAllMyPosts(req, res) {
-    console.log("USER ID",req.user.user.id)
     const posts = await postService.getAllMyPosts(req.user.user.id)
-    console.log(posts)
     res.json(posts)
 }
 
 async function getPostById(req, res) {
-    res.json(req.params.id)
+    const postId = Number(req.params.id)
+    const post = await postService.getPostById(postId)
+    res.json(post)
 }
 
 async function createPost(req, res) {
@@ -20,12 +20,10 @@ async function createPost(req, res) {
 }
 
 async function updatePost(req, res) {
-    console.log("Testing")
-    console.log("PATCH hit", req.params.id)
     const postId = Number(req.params.id)
-    const { published } = req.body
+    const { bodyData } = req.body
 
-    const updatedPost = await postService.updatePost(postId, { published })
+    const updatedPost = await postService.updatePost(postId, { bodyData })
     res.json(updatedPost)
 }
 
