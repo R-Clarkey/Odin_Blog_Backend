@@ -12,7 +12,7 @@ async function getAllMyPosts(req, res) {
 }
 
 async function getPostById(req, res) {
-    res.json("ID")
+    res.json(req.params.id)
 }
 
 async function createPost(req, res) {
