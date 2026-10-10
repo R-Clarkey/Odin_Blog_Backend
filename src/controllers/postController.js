@@ -10,9 +10,7 @@ async function getAllMyPosts(req, res) {
 }
 
 async function getPostById(req, res) {
-    const postId = Number(req.params.id)
-    const post = await postService.getPostById(postId)
-    res.json(post)
+    res.json(req.params.id)
 }
 
 async function createPost(req, res) {
