@@ -12,7 +12,9 @@ async function getAllMyPosts(req, res) {
 }
 
 async function getPostById(req, res) {
-    res.json(req.params.id)
+    const post = await postService.getPostById(Number(req.params.id))
+    console.log(post)
+    res.json(post)
 }
 
 async function createPost(req, res) {
