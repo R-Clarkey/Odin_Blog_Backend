@@ -10,7 +10,9 @@ async function getAllMyPosts(req, res) {
 }
 
 async function getPostById(req, res) {
-    res.json(req.params.id)
+    const postId = Number(req.params.id)
+    const post = await postService.getPostById(postId)
+    res.json(post)
 }
 
 async function createPost(req, res) {
@@ -19,9 +21,7 @@ async function createPost(req, res) {
 
 async function updatePost(req, res) {
     const postId = Number(req.params.id)
-    const { bodyData } = req.body
-
-    const updatedPost = await postService.updatePost(postId, { bodyData })
+    const updatedPost = await postService.updatePost(postId, req.body)
     res.json(updatedPost)
 }
 

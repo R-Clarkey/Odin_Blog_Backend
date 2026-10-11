@@ -1,4 +1,5 @@
 import { prisma } from "../config/prisma.js";
+import sanitize from "sanitize-html";
 
 export function getAllPosts() {
     return prisma.post.findMany()
@@ -15,22 +16,6 @@ export function getAllMyPosts(userId) {
                     name: true
                 }
             }
-        }
-    })
-}
-
-export function getPostById(postId) {
-    return prisma.post.findUnique({
-        where: {
-            id: postId
-        }
-    })
-}
-
-export function getPostById(postId) {
-    return prisma.post.findUnique({
-        where: {
-            id: postId
         }
     })
 }
@@ -52,9 +37,18 @@ export function getPostById(postId) {
     });}
 
 export function updatePost(postId, data) {
-    return prisma.post.update({
-        where: { id: postId },
-        data
-    })
+	console.log("data", data)
+
+	const safeData = {
+		...data,
+		content: typeof data.content === "string" ? sanitize(data.content) : data.content
+	}
+
+	console.log("safeData", safeData)
+
+	return prisma.post.update({
+		where: { id: postId },
+		data: safeData
+	})
 }
 
