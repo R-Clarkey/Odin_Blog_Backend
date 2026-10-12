@@ -16,7 +16,10 @@ async function getPostById(req, res) {
 }
 
 async function createPost(req, res) {
-    res.json("Create")
+    const userId = req.user.user.id
+    const { title, content } = req.body
+    const post = await postService.createPost({title, content, userId})
+	res.status(201).json(post)
 }
 
 async function updatePost(req, res) {
@@ -26,7 +29,9 @@ async function updatePost(req, res) {
 }
 
 async function deletePost(req, res) {
-    res.json("Delete")
+    const postId = Number(req.params.id)
+    const deletedPost = await postService.deletePost(postId, req.user)
+    res.json(deletedPost)
 }
 
 export {

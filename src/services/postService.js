@@ -52,3 +52,36 @@ export function updatePost(postId, data) {
 	})
 }
 
+export async function deletePost(postId, user) {
+	const post = await prisma.post.findUnique({
+		where: {
+			id: postId
+		}
+	})
+
+	if (!post) {
+		throw new Error("Post not found")
+	}
+
+	if (post.authorId !== user.user.id) {
+		throw new Error("Unauthorized")
+	}
+
+	return prisma.post.delete({
+		where: {
+			id: postId
+		}
+	})
+}
+
+export async function createPost({title, content, userId}) {
+    const post = await prisma.post.create({
+        data: {
+            title: title,
+            content: content,
+            authorId: userId
+        }
+    })
+    console.log(post)
+    return post
+}
