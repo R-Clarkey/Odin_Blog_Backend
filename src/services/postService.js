@@ -2,7 +2,18 @@ import { prisma } from "../config/prisma.js";
 import sanitize from "sanitize-html";
 
 export function getAllPosts() {
-    return prisma.post.findMany()
+    return prisma.post.findMany({
+        where: {
+            published: true
+        },
+        include: {
+            author: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    })
 }
 
 export function getAllMyPosts(userId) {

@@ -1,7 +1,8 @@
 import * as postService from "../services/postService.js"
 
 async function getAllPosts(req, res) {
-    res.json("All")
+    const posts = await postService.getAllPosts()
+    res.json(posts)
 }
 
 async function getAllMyPosts(req, res) {
