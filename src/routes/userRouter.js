@@ -4,6 +4,7 @@ import * as userController from "../controllers/userController.js"
 const router = Router()
 
 router.get("/", userController.getAllUsers)
+router.get("/authors", userController.getAllAuthors)
 router.get("/:id", userController.getUserById)
 router.post("/", userController.createUser)
 router.patch("/:id", userController.updateUser)

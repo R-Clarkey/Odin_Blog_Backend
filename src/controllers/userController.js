@@ -1,5 +1,12 @@
+import * as userService from "../services/userService.js"
+
 async function getAllUsers(req, res) {
-    res.json("Users")
+    const users = userService.getAllUsers()
+    res.json(users)
+}
+
+async function getAllAuthors(req, res) {
+
 }
 
 async function getUserById(req, res) {
@@ -20,6 +27,7 @@ async function deleteUser(req, res) {
 
 export {
     getAllUsers,
+    getAllAuthors,
     getUserById,
     createUser,
     updateUser,
