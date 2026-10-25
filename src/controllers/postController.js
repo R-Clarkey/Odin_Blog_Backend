@@ -5,6 +5,12 @@ async function getAllPosts(req, res) {
     res.json(posts)
 }
 
+async function getAllPostsById(req, res) {
+    const authorId = Number(req.params.id)
+    const posts = await postService.getAllPostsById(authorId)
+    res.json(posts)
+}
+
 async function getAllMyPosts(req, res) {
     const posts = await postService.getAllMyPosts(req.user.user.id)
     res.json(posts)
@@ -37,6 +43,7 @@ async function deletePost(req, res) {
 
 export {
     getAllPosts,
+    getAllPostsById,
     getAllMyPosts,
     getPostById,
     createPost,

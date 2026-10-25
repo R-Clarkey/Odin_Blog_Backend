@@ -6,6 +6,7 @@ const router = Router()
 
 router.get("/", postController.getAllPosts)
 router.get("/me", authMiddleware, postController.getAllMyPosts)
+router.get("/user/:id", authMiddleware, postController.getAllPostsById)
 router.get("/:id", postController.getPostById)
 router.post("/", authMiddleware, postController.createPost)
 router.patch("/:id", authMiddleware, postController.updatePost)

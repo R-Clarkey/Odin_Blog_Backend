@@ -1,7 +1,9 @@
 import { verifyToken } from "../config/jwt.js";
 
 export function authMiddleware(req, res, next) {
+    console.log("Middleware reached")
     const authHeader = req.headers.authorization
+    console.log(req.headers.authorization)
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(401).json({ error: "Missing Token"})

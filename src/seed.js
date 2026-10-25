@@ -2,7 +2,7 @@ import { PrismaClient } from "../generated/prisma/index.js"
 import { prisma } from "./config/prisma.js"
 
 async function main() {
-	const authorEmail = "test@test.com"
+	const authorEmail = "bob@bob.com"
 
 	const author = await prisma.user.findUnique({
 		where: { email: authorEmail },

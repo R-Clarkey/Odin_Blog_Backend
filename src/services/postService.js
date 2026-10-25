@@ -16,6 +16,22 @@ export function getAllPosts() {
     })
 }
 
+export function getAllPostsById(authorId) {
+	return prisma.post.findMany({
+		where: {
+			authorId: authorId,
+			published: true
+		},
+		include: {
+			author: {
+				select: {
+					name: true
+				}
+			}
+		}
+	})
+}
+
 export function getAllMyPosts(userId) {
     return prisma.post.findMany({
         where: {
@@ -31,21 +47,32 @@ export function getAllMyPosts(userId) {
     })
 }
 
-export function getPostById(postId) {  
-    return prisma.post.findUnique({    
-        where: {      
-            id: postId,    
-        },    
-        include: {      
-            author: {
-                select: {
-                    id: true,
-                    name: true,
-                },
-            },     
-            comments: true,    
-        },  
-    });}
+export function getPostById(postId) {
+	return prisma.post.findUnique({
+		where: {
+			id: postId,
+		},
+		include: {
+			author: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
+			comments: {
+				include: {
+					author: {
+						select: {
+							id: true,
+							name: true,
+						},
+					},
+				},
+			},
+		},
+	})
+}
+
 
 export function updatePost(postId, data) {
 	console.log("data", data)
