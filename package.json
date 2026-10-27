@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --trace-warnings --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "postinstall": "prisma skills sync || exit 0"
   },
   "keywords": [],
@@ -23,14 +23,17 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "express-validator": "^7.3.2",
+    "jest": "^30.5.2",
     "jsonwebtoken": "^9.0.3",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.23.0",
-    "sanitize-html": "^2.18.0"
+    "sanitize-html": "^2.18.0",
+    "supertest": "^7.3.1"
   },
   "devDependencies": {
     "@types/pg": "^8.23.1",
+    "dotenv-cli": "^11.0.0",
     "prisma": "^7.10.0"
   }
 }
